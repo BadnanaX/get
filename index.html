@@ -53,12 +53,11 @@
         }
         .button.inactive {
             background-color: #7289da;
-            cursor: pointer;
         }
         .button.active {
             background-color: #4CAF50;
         }
-        #getKeyButton {
+        #getKeyButton:disabled {
             background-color: #555;
             cursor: not-allowed;
         }
@@ -80,6 +79,7 @@
             setTimeout(() => {
                 const getKeyButton = document.getElementById("getKeyButton");
                 getKeyButton.disabled = false;
+                getKeyButton.classList.remove("inactive");
                 getKeyButton.classList.add("active");
                 getKeyButton.onclick = function() {
                     window.location.href = "https://link-hub.net/1206371/killa-hub-key";
