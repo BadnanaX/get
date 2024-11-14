@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Killa Hub Key System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .notification {
+            background-color: #ff9800;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Killa Hub Key System</h1>
+    <button id="getKeyBtn">Get Key</button>
+    <div class="notification" id="notification">Redirecting to the key page...</div>
+</div>
+
+<script>
+    const getKeyBtn = document.getElementById('getKeyBtn');
+    const notification = document.getElementById('notification');
+    const keyPageUrl = 'https://link-hub.net/1206371/killa-hub-key'; // Link to redirect to
+
+    // Function to handle button click and redirect
+    getKeyBtn.addEventListener('click', () => {
+        notification.style.display = 'block'; // Show notification
+        setTimeout(() => {
+            window.location.href = keyPageUrl; // Redirect to key page
+        }, 1500); // Redirect after 1.5 seconds (for better user experience)
+    });
+</script>
+
+</body>
+</html>
