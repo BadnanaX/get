@@ -48,25 +48,27 @@
             font-weight: 500;
             border: none;
             border-radius: 5px;
-            cursor: not-allowed;
-            background-color: #555;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .button.active {
+        .button.inactive {
+            background-color: #7289da;
             cursor: pointer;
+        }
+        .button.active {
             background-color: #4CAF50;
         }
-        .discord-link {
-            color: #7289da;
-            text-decoration: underline;
-            cursor: pointer;
+        #getKeyButton {
+            background-color: #555;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Killa Hub Key System</h1>
-        <div class="steps">Step 1: <span class="discord-link" onclick="joinDiscord()">Join Discord</span> to unlock the key</div>
+        <div class="steps">Step 1:</div>
+        <button id="joinDiscordButton" class="button inactive" onclick="joinDiscord()">Join Discord</button>
         <button id="getKeyButton" class="button" disabled>Get Key</button>
     </div>
 
