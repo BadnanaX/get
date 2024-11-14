@@ -6,6 +6,7 @@
     <title>Killa Hub Key System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -13,48 +14,74 @@
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: linear-gradient(135deg, #141e30, #243b55);
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
+            overflow: hidden;
         }
         .container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 30px 40px;
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 40px;
             border-radius: 15px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
         }
         h1 {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 20px;
-            color: #fff;
+            color: #FF3E3E;
+            animation: slideIn 0.8s ease;
         }
         button {
-            background-color: #4CAF50;
+            background: linear-gradient(90deg, #FF3E3E, #FF5733);
             border: none;
             padding: 12px 30px;
-            color: white;
             font-size: 18px;
+            font-weight: 500;
+            color: white;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
+            margin-top: 25px;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
-        button:hover {
-            background-color: #45a049;
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
         }
-        .notification {
+        button:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+        .join-notification, .notification {
             background-color: #ff9800;
             color: white;
             padding: 12px;
             border-radius: 5px;
-            margin-top: 20px;
+            margin-top: 15px;
             display: none;
+        }
+        .clipboard-icon {
+            font-size: 18px;
+            cursor: pointer;
+            color: #FF3E3E;
+            margin-left: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .clipboard-icon:hover {
+            color: #FF5733;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); }
+            to { transform: translateY(0); }
         }
     </style>
 </head>
@@ -62,21 +89,43 @@
 
 <div class="container">
     <h1>Killa Hub Key System</h1>
-    <button id="getKeyBtn">Get Key</button>
+    
+    <!-- Join Discord button -->
+    <button id="joinDiscordBtn">Join Discord</button>
+    <div class="join-notification" id="joinNotification">Please join our Discord to proceed.</div>
+
+    <!-- Get Key button, initially disabled -->
+    <button id="getKeyBtn" disabled>Get Key</button>
     <div class="notification" id="notification">Redirecting to the key page...</div>
 </div>
 
 <script>
+    const joinDiscordBtn = document.getElementById('joinDiscordBtn');
     const getKeyBtn = document.getElementById('getKeyBtn');
+    const joinNotification = document.getElementById('joinNotification');
     const notification = document.getElementById('notification');
-    const keyPageUrl = 'https://link-hub.net/1206371/killa-hub-key'; // Link to redirect to
+    const discordInvite = 'https://discord.gg/xKeVjN2JHZ';
+    const keyPageUrl = 'https://link-hub.net/1206371/killa-hub-key';
 
-    // Function to handle button click and redirect
+    // Function to handle the Join Discord button click
+    joinDiscordBtn.addEventListener('click', () => {
+        // Open Discord invite in a new tab
+        window.open(discordInvite, '_blank');
+        
+        // Show a notification to the user
+        joinNotification.style.display = 'block';
+        joinNotification.textContent = 'Discord joined! Now you can get your key.';
+        
+        // Enable the Get Key button
+        getKeyBtn.disabled = false;
+    });
+
+    // Function to handle the Get Key button click and redirect
     getKeyBtn.addEventListener('click', () => {
-        notification.style.display = 'block'; // Show notification
+        notification.style.display = 'block'; // Show redirecting notification
         setTimeout(() => {
             window.location.href = keyPageUrl; // Redirect to key page
-        }, 1500); // Redirect after 1.5 seconds (for better user experience)
+        }, 1500); // Redirect after 1.5 seconds
     });
 </script>
 
