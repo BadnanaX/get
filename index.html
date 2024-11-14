@@ -38,42 +38,41 @@
             color: #FF3E3E;
             animation: slideIn 0.8s ease;
         }
+        .steps {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .step-item {
+            margin: 10px 0;
+        }
         button {
-            background: linear-gradient(90deg, #FF3E3E, #FF5733);
+            background: linear-gradient(90deg, #666, #777);
             border: none;
             padding: 12px 30px;
             font-size: 18px;
             font-weight: 500;
             color: white;
             border-radius: 8px;
-            cursor: pointer;
+            cursor: not-allowed;
             margin-top: 25px;
             transition: transform 0.3s ease, background 0.3s ease;
         }
-        button:disabled {
-            background: #666;
-            cursor: not-allowed;
+        button.enabled {
+            background: linear-gradient(90deg, #FF3E3E, #FF5733);
+            cursor: pointer;
         }
-        button:hover:not(:disabled) {
+        button.enabled:hover {
             transform: scale(1.05);
         }
-        .join-notification, .notification {
+        .notification {
             background-color: #ff9800;
             color: white;
             padding: 12px;
             border-radius: 5px;
             margin-top: 15px;
             display: none;
-        }
-        .clipboard-icon {
-            font-size: 18px;
-            cursor: pointer;
-            color: #FF3E3E;
-            margin-left: 10px;
-            animation: fadeIn 1s ease-in-out;
-        }
-        .clipboard-icon:hover {
-            color: #FF5733;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -90,37 +89,45 @@
 <div class="container">
     <h1>Killa Hub Key System</h1>
     
-    <!-- Join Discord button -->
-    <button id="joinDiscordBtn">Join Discord</button>
-    <div class="join-notification" id="joinNotification">Please join our Discord to proceed.</div>
+    <!-- Step-by-step instructions -->
+    <div class="steps">
+        <div class="step-item">
+            <strong>Step 1:</strong> Join our Discord server to unlock the key link.
+            <button id="joinDiscordBtn" class="enabled">Join Discord</button>
+        </div>
+        <div class="step-item">
+            <strong>Step 2:</strong> After joining, click "Get Key" to proceed.
+            <button id="getKeyBtn">Get Key</button>
+        </div>
+    </div>
 
-    <!-- Get Key button, initially disabled -->
-    <button id="getKeyBtn" disabled>Get Key</button>
     <div class="notification" id="notification">Redirecting to the key page...</div>
 </div>
 
 <script>
     const joinDiscordBtn = document.getElementById('joinDiscordBtn');
     const getKeyBtn = document.getElementById('getKeyBtn');
-    const joinNotification = document.getElementById('joinNotification');
     const notification = document.getElementById('notification');
     const discordInvite = 'https://discord.gg/xKeVjN2JHZ';
     const keyPageUrl = 'https://link-hub.net/1206371/killa-hub-key';
 
-    // Function to handle the Join Discord button click
+    // Initial button state
+    getKeyBtn.disabled = true;
+
+    // Handle Join Discord button click
     joinDiscordBtn.addEventListener('click', () => {
-        // Open Discord invite in a new tab
         window.open(discordInvite, '_blank');
+        joinDiscordBtn.textContent = "Joined Discord";
+        joinDiscordBtn.classList.remove('enabled');
+        joinDiscordBtn.disabled = true;
         
-        // Show a notification to the user
-        joinNotification.style.display = 'block';
-        joinNotification.textContent = 'Discord joined! Now you can get your key.';
-        
-        // Enable the Get Key button
+        // Enable Get Key button
         getKeyBtn.disabled = false;
+        getKeyBtn.classList.add('enabled');
+        getKeyBtn.style.cursor = 'pointer';
     });
 
-    // Function to handle the Get Key button click and redirect
+    // Handle Get Key button click
     getKeyBtn.addEventListener('click', () => {
         notification.style.display = 'block'; // Show redirecting notification
         setTimeout(() => {
